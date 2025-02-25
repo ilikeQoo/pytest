@@ -32,4 +32,4 @@ jobs:
     # 4. 파이썬 스크립트 실행 - 실제 Python 스크립트를 실행합니다.
     - name: Run Python script
       run: |
-        python your_script.py  # your_script.py는 실행할 파이썬 파일 이름
+        python test.py  # your_script.py는 실행할 파이썬 파일 이름
