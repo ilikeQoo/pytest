@@ -1,35 +1,33 @@
-name: Python Application
+name: 캠핑장 예약 체크
 
 on:
-  push:
-    branches:
-      - main  # main 브랜치에 푸시할 때마다 실행됩니다.
-  pull_request:
-    branches:
-      - main  # main 브랜치에 PR을 보낼 때마다 실행됩니다.
+  schedule:
+    # 5분마다 실행
+    - cron: '*/5 * * * *'
+  workflow_dispatch:  # 수동 실행을 원할 때 추가
 
 jobs:
-  build:
-    runs-on: ubuntu-latest  # GitHub에서 제공하는 Ubuntu 환경에서 실행
+  camping_check:
+    runs-on: ubuntu-latest  # Ubuntu 환경에서 실행
 
     steps:
-    # 1. 체크아웃 - 코드를 리포지토리에서 가져옵니다.
-    - name: Checkout code
-      uses: actions/checkout@v2
+      # 1. 리포지토리 코드 체크아웃
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    # 2. 파이썬 설정 - Python 버전을 설정합니다.
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'  # 사용할 Python 버전을 설정합니다.
+      # 2. Python 3 설치
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # 사용하려는 Python 버전
 
-    # 3. 의존성 설치 - requirements.txt 파일에 명시된 의존성을 설치합니다.
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # requirements.txt 파일에 명시된 라이브러리들을 설치
+      # 3. 의존성 설치 (requirements.txt에 있는 패키지들)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # requirements.txt에 있는 의존성 설치
 
-    # 4. 파이썬 스크립트 실행 - 실제 Python 스크립트를 실행합니다.
-    - name: Run Python script
-      run: |
-        python test.py  # your_script.py는 실행할 파이썬 파일 이름
+      # 4. 스크립트 실행
+      - name: Run camping check script
+        run: |
+          python test.py
