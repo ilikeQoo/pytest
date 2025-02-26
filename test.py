@@ -62,10 +62,11 @@ try:
         if "예약가능" in status:
             sendYN = True  # 예약 가능한 사이트가 하나라도 있으면 True
             output += f"{site_name} : {status}\n"
-    print(output)
-    # slack_result = sendSlackWebHook(output)
-    # print(slack_result)
-    previous_output = output  # 현재 output을 이전 기록으로 저장
+    if sendYN:
+        print(output)
+        slack_result = sendSlackWebHook(output)
+        print(slack_result)
+        previous_output = output  # 현재 output을 이전 기록으로 저장
 
 except Exception as e:
     print(f"오류 발생: {str(e)}")
