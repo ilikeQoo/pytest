@@ -6,7 +6,7 @@ start_date='20250304'
 #숙박일수
 res_day=1
 end_date=str(int(start_date)+res_day-1)
-slack_url = "https://hooks.slack.com/services/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"
+slack_url = "https://hooks.slack.com/services/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"
 def sendSlackWebHook(strText):
     headers = {
         "Content-type" : "application/json"
